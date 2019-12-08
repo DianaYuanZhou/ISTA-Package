@@ -1,0 +1,21 @@
+Package: ISTA
+Title: Iterative Soft_thresholding Algorithm
+Version: 1.0
+Author: Yuan Zhou <yuanzhou1@ufl.edu> Lingsong Meng <lingsongmeng@ufl.edu>
+Maintainer: Yuan Zhou <yuanzhou1@ufl.edu> Lingsong Meng <lingsongmeng@ufl.edu>
+Depends: R (>= 2.10)
+Description: ISTA algrithm combined with Backtracking line search, using Cross-validation/AIC/BIC to select optimal parameter
+License: GPL
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: 
+    MASS,
+    Metrics
+Suggests: 
+    testthat (>= 2.1.0),
+    knitr,
+    rmarkdown,
+    MASS,
+    Metrics
+VignetteBuilder: knitr
