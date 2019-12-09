@@ -9,13 +9,12 @@
 ##' @param method Method used to select optimal parameters, can only chosen from 'CV', 'AIC' or 'BIC', default is NULL
 ##' @param epoch The maximum number of steps allowed when training the model, default is 1e4
 ##' @param patience Used to decide when end training after a minima occured, default is 50
-##' @return MSE between prediction values and true values of response'
+##' @return A list containing estimated coefficients, MSE between prediction values and true values of response'
 ##' @author Yuan Zhou, Lingsong Meng
 ##' @export
 
-# library(MASS)
-# library(Metrics)
-# source("Function.R")
+# library(MASS) library(Metrics)
+# source('Function.R')
 
 ISTA.main <- function(data.X, data.Y, scale = T,
     lambda = 0.01, method = NULL, epoch = 10000,
@@ -32,6 +31,7 @@ ISTA.main <- function(data.X, data.Y, scale = T,
 
     list2env(split(mget(c("data.X", "data.Y")),
         0.8, "train", "test"), envir = environment())
+    ISTA.result <- list()
 
     if (is.null(method)) {
         for (i in 1:length(lambda)) {
@@ -45,7 +45,10 @@ ISTA.main <- function(data.X, data.Y, scale = T,
             cat("Test MSE in test set with lambda",
                 lambda[i], "is", test.mse, "\n")
         }
-        return(test.mse)
+        ISTA.result <- list(`Estimate coefficient` = parameters.best,
+            `MSE in test set` = test.mse)
+        print(parameters.best)
+        return(ISTA.result)
     } else {
         stopifnot(method %in% c("CV", "AIC",
             "BIC"))
@@ -166,11 +169,13 @@ ISTA.main <- function(data.X, data.Y, scale = T,
             test.mse <- mse(data.Y.test, Y.test.hat)
             cat("Test MSE in test set with best lambda under",
                 med, "is", test.mse, "\n")
-            result.mse <- cbind(result.mse, test.mse)
-            colnames(result.mse)[ncol(result.mse)] <- med
+            print(parameters.best)
+            ISTA.result[[med]] <- list(`Estimate coefficient` = parameters.best,
+                `MSE in test set` = test.mse)
+
         }
     }
-    return(result.mse)
+    return(ISTA.result)
 }
 
 
