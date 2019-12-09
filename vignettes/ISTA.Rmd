@@ -16,7 +16,7 @@ library(MASS)
 library(Metrics)
 ```
 
-### An example using Bodyfat dataset without selection of tuing parameter $\lambda$
+### An example using Bodyfat dataset without selection of tuning parameter $\lambda$
 ```{r}
 library(ISTA)
 data("bodyfat")
