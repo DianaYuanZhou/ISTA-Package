@@ -2,6 +2,7 @@
 ##'
 ##' @title Functions used in ISTA algrithm
 ##' @author Yuan Zhou, Lingsong Meng
+##' @export
 
 # Simulation function
 func.sim <- function(index, x, noise) {

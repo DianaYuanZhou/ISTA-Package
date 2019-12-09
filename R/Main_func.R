@@ -11,10 +11,11 @@
 ##' @param patience Used to decide when end training after a minima occured, default is 50
 ##' @return MSE between prediction values and true values of response'
 ##' @author Yuan Zhou, Lingsong Meng
+##' @export
 
 # library(MASS)
 # library(Metrics)
-#source("Function.R")
+# source("Function.R")
 
 ISTA.main <- function(data.X, data.Y, scale = T,
     lambda = 0.01, method = NULL, epoch = 10000,
